@@ -27,7 +27,6 @@ test('source distribution includes every runtime resource and keeps the npm-publ
 test('pnpm frozen installation uses the same peer setting as the committed lockfile',()=>{
  assert.match(read('pnpm-workspace.yaml'),/^autoInstallPeers: false$/m)
  assert.match(read('pnpm-lock.yaml'),/^\s+autoInstallPeers: false$/m)
- assert.ok(!read('.npmrc').includes('auto-install-peers='))
 })
 test('catalog README documents source install, category, permissions and original attribution',()=>{
  const text=read('README.md')

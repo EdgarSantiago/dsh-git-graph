@@ -37,7 +37,8 @@ The repository uses the GitHub topic **`dsh-plugin`**. According to the [catalog
 - Automatic discovery at the workspace root and up to two directory levels below it, including sibling repositories, nested repositories, and Git worktrees.
 - Repository list and remembered selection scoped to the current workspace. Old responses and confirmations cannot populate a different workspace.
 - Commit graph, text search, branch/tag filter, paginated history, commit details, file history, and commit comparison.
-- Staged, unstaged and untracked file groups, per-file diffs and batch selection.
+- Compact Changes summary; collapsible staged, unstaged and untracked file groups, per-file diffs and batch selection.
+- Aligned history headers, clear branch/commit selection, icon-labeled actions with worktree-aware disabled states, and a quiet shortcut footer. Narrow panes retain a branch picker and the selected ref's confirmed actions.
 - Stage, unstage, restore, ignore, commit, fetch, pull, push, branch and tag operations, with UI confirmation before writes.
 - An approval-gated `git_graph_operation` Agent tool using the same Git executor, restricted to the Agent's current repository.
 
@@ -92,10 +93,10 @@ Selected real test output:
 ✔ real traced plugin applies, serves reads, disposes both registries and reapplies without collisions
 ```
 
-These are automated tests, not a fabricated screenshot or a claim of automated visual verification. The legacy screenshots, standalone `web/` page, scripts and compatibility notes retained from upstream describe older releases; they are not current runtime entry points or the validation instructions for this adaptation.
+These are automated tests, not screenshots or automated visual verification. Confirm the final layout in the connected Harness UI.
 
 ## Source and license
 
-Current entry points: `index.js` (Host), `client.js` (native Client), and `cordis.patch.yml` (bundle registration). The `files` allowlist excludes dependencies, tests, legacy scripts and historical screenshots from the installable package.
+Current entry points: `index.js` (Host), `client.js` (native Client), and `cordis.patch.yml` (bundle registration). The `files` allowlist ships the runtime and display/documentation resources, excluding development dependencies, tests and CI configuration.
 
 Derived from the original [dsh-git-graph](https://github.com/1841220388zzzcccxxx-star/dsh-git-graph); upstream contributors retain their copyright. Distributed under the original [MIT license](./LICENSE). See [CHANGELOG.md](./CHANGELOG.md) for adaptation release notes.

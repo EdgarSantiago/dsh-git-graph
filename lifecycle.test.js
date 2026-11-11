@@ -107,6 +107,34 @@ test('real traced plugin applies, serves reads, disposes both registries and rea
   }
 })
 
+test('directory browsing without a path requires an authorized root and keeps its default root', async () => {
+  for (const configured of [false, true]) {
+    const { root, request } = await runtime()
+    const fiber = await root.plugin(plugin, configured ? { repo } : {})
+    try {
+      const result = await request('listdir')
+      assert.equal(result.ok, configured)
+      if (configured) assert.equal(result.path, repo.replace(/\\/g, '/'))
+      else { assert.equal(result.status, 403); assert.equal(result.error, 'path-not-allowed') }
+    } finally { await fiber.dispose() }
+  }
+})
+
+test('an unborn repository still exposes untracked changes without inventing a Git failure', async () => {
+  const unborn = join(fixture, 'unborn')
+  mkdirSync(unborn)
+  execFileSync('git', ['-C', unborn, 'init', '--initial-branch=main'])
+  writeFileSync(join(unborn, 'new.txt'), 'untracked\n')
+  const { root, request } = await runtime()
+  const fiber = await root.plugin(plugin, { repo: unborn })
+  try {
+    const result = await request('workstatus', { repo: unborn })
+    assert.equal(result.ok, true)
+    assert.deepEqual(result.counts, { staged: 0, unstaged: 0, untracked: 1 })
+    assert.equal(result.untracked[0].path, 'new.txt')
+  } finally { await fiber.dispose() }
+})
+
 test('failed activation rolls back the already registered tool before a clean retry', async () => {
   const { root, routes, tools, state } = await runtime()
   state.routeError = Error('Deliberate route registration failure')

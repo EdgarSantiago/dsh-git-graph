@@ -6,7 +6,7 @@
 - `client.js` is the native React Client registered in `conversation.view`. Do not restore the legacy iframe UI.
 - `cordis.patch.yml` registers `@edgarsantiago/dsh-git-graph` as a bundle.
 - Read `README.md` for current installation, permissions and compatibility; `CHANGELOG.md` records adaptation releases.
-- `web/`, old screenshots, legacy scripts and `docs/compatibility.md` are retained upstream history, not current runtime/compatibility evidence.
+- The repository contains only the native implementation, tests and current documentation. Do not restore old iframe assets or upstream release scripts.
 
 ## Safety and compatibility constraints
 
@@ -33,4 +33,4 @@ Tests use Node's built-in runner, real temporary Git repositories and the Cordis
 
 ## Distribution
 
-This release is GitHub-only. `private: true` is an intentional npm-publication guard, not GitHub visibility. Do not run `scripts/publish.mjs`, publish npm, or commit/tag/push without a corresponding user request. Install or update the local profile through Harness's plugin manager, never by editing profile manifests manually.
+This release is GitHub-only. `private: true` is an intentional npm-publication guard, not GitHub visibility. Do not publish npm or commit/tag/push without a corresponding user request. Install or update the local profile through Harness's plugin manager, never by editing profile manifests manually.

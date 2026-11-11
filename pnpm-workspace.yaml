@@ -1,6 +1,6 @@
 packages:
   - '.'
 
-# pnpm 11 reads project behavior from this file rather than .npmrc.
+# pnpm 11 project settings; keep these aligned with the committed lockfile.
 # The running Harness supplies the optional DSH peer; do not install another copy.
 autoInstallPeers: false

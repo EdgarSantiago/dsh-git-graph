@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.14.6 (local, unreleased)
+
+- Compress a clean working tree into one Changes summary row, with collapsible file groups when changes exist.
+- Add subtle theme-based borders, clearer selected branches/commits and current-branch indicators.
+- Align commit, hash, author and date headers; use a compact graph gutter and a sticky table header.
+- Add lightweight SVG control icons and worktree-aware Stage all, Unstage all and Commit availability.
+- Pin smaller keyboard hints below the history and retain branch/tag actions in narrow panes.
+- Preserve selection by commit hash and keep focus/navigation within the owned history rows.
+- Keep all Git write confirmations and workspace isolation unchanged. No GitHub/npm publication is performed for this local update.
+- Remove the unused standalone web UI, historical screenshots/compatibility docs, old release scripts, README redirect and empty npm configuration.
+- Prune superseded CSS declarations and unused labels without changing responsive rules; remove an unreachable directory-browser branch.
+- Surface failed Git status/index reads instead of returning a misleading clean working tree; retain unborn-repository support.
+
 ## 0.14.5
 
 - Prepare the GitHub source release under `@edgarsantiago/dsh-git-graph`, with installation, permissions, compatibility and upstream credits documented.
@@ -29,4 +42,4 @@
 
 ## Upstream
 
-Adapted from [1841220388zzzcccxxx-star/dsh-git-graph](https://github.com/1841220388zzzcccxxx-star/dsh-git-graph), whose MIT notice and source attribution are retained. The public branch uses a fresh maintainer history. Older upstream files and screenshots do not describe the current native Client implementation.
+Adapted from [1841220388zzzcccxxx-star/dsh-git-graph](https://github.com/1841220388zzzcccxxx-star/dsh-git-graph), whose MIT notice and source attribution are retained. The public branch uses a fresh maintainer history. Obsolete upstream pages, scripts and screenshots have been removed; the native implementation and regression tests are maintained here.

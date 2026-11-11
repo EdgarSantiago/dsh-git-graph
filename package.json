@@ -1,7 +1,7 @@
 {
   "name": "@edgarsantiago/dsh-git-graph",
   "private": true,
-  "version": "0.14.5",
+  "version": "0.14.6",
   "description": "English-only, workspace-scoped Git graph, diffs and confirmed Git operations inside DeepSeek Harness.",
   "license": "MIT",
   "type": "module",
@@ -33,14 +33,9 @@
     "README_PTBR.md",
     "cordis.patch.yml",
     "README.md",
-    "README_EN.md",
     "CHANGELOG.md",
     "LICENSE"
   ],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",

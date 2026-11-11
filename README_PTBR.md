@@ -43,20 +43,16 @@ O workspace associado à sessão é consultado no registro nativo do Harness. Se
 
 Uma pasta externa só entra na lista daquele workspace após **Open repository**, por escolha explícita. Não vira opção dos demais workspaces. A raiz consultada fica visível abaixo do seletor. Se o workspace não tiver Git, o painel permanece vazio em vez de escolher outro projeto como fallback.
 
-## Correção de recarga (0.14.2)
+## Ciclo de vida e erros
 
-A versão anterior registrava a limpeza em um evento `dispose` que o Cordis não emite ao descarregar plugins. Isso deixava uma rota HTTP antiga viva, impedia a nova ativação com `duplicate prefix route` e mascarava o contexto descartado como `operation-failed`.
-
-A rota e a ferramenta agora pertencem a efeitos descartáveis, com rollback em falhas de ativação. O endpoint passou a `/git-graph-bilingual/api`, evitando a rota órfã da versão antiga no processo atual. O registro legado deixa de ser usado; reiniciar o Harness remove esse resíduo. Novas recargas da versão corrigida não deixam outra rota para trás.
-
-A descoberta também aceita sessões carregadas sem Agent ativo, autoriza os repositórios encontrados antes de abrir o histórico e retorna diagnósticos úteis em vez de esconder toda falha atrás de uma mensagem genérica. Nenhum repositório é criado automaticamente quando a pasta não usa Git.
+A rota e a ferramenta pertencem a efeitos descartáveis, com rollback em falhas de ativação. O endpoint `/git-graph-bilingual/api` é mantido por compatibilidade, não por suporte a múltiplos idiomas. Falhas ao ler o índice/status do Git retornam erro explícito, nunca um estado falso de árvore limpa.
 
 ## Desenvolvimento
 
 Compatibilidade declarada: DSH **0.2.2-rc.1**, versão disponível durante a implementação. Não há dependências em produção nem script de build. Os testes usam o SDK do Cordis como dependência de desenvolvimento.
 
 ```sh
-pnpm install --ignore-scripts
+pnpm install --frozen-lockfile --ignore-scripts
 pnpm run check
 pnpm test
 ```

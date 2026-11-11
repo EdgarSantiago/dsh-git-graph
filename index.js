@@ -574,9 +574,8 @@ export function apply(ctx, config = {}) {
         }
 
         if (op === 'listdir') {
-          // Directory browser for the "打开文件夹" picker. Read-only; lists only
-          // subdirectories (never files) with a per-entry git marker ("git"
-          // = the folder contains a .git entry, so it is a repo or a submodule).
+          // Compatibility read API, confined to authorized roots. The native
+          // Client uses Harness's directory picker instead of this browser.
           const hasDotGit = (dir) => {
             try { return !!statSync(join(dir, '.git')) } catch { return false }
           }
@@ -598,19 +597,6 @@ export function apply(ctx, config = {}) {
           let p = String(url.searchParams.get('path') || browseRoots[0] || '').trim().replace(/\\/g, '/')
           if (!p || !browseRoots.some((root) => insideRepo(root, resolve(p), true))) {
             sendJson({ ok: false, error: 'path-not-allowed' }, 403); return
-          }
-          if (!p) {
-            if (process.platform === 'win32') {
-              // No path yet: list the drive letters the picker can start from.
-              const drives = []
-              for (let c = 65; c <= 90; c++) {
-                const d = String.fromCharCode(c) + ':/'
-                try { if (statSync(d).isDirectory()) drives.push(d) } catch { /* drive absent */ }
-              }
-              sendJson({ ok: true, path: '', parent: null, drives, dirs: [], root: null, truncated: false, readable: true })
-              return
-            }
-            p = '/'
           }
           if (/^[A-Za-z]:$/.test(p)) p += '/' // bare drive letter ("C:") -> "C:/"
           let abs
@@ -719,9 +705,9 @@ export function apply(ctx, config = {}) {
             // VSCode-style working-tree overview: structured file lists grouped by
             // staged / unstaged / untracked, with per-file +/- counts (numstat).
             const branch = (await runGit(repo, ['rev-parse', '--abbrev-ref', 'HEAD']).catch(() => '')).trim() || 'HEAD'
-            const statusOut = await runGit(repo, ['status', '--porcelain=v1', '-z']).catch(() => '')
-            const stagedNum = await runGit(repo, ['diff', '--cached', '--numstat', '-z']).catch(() => '')
-            const unstagedNum = await runGit(repo, ['diff', '--numstat', '-z']).catch(() => '')
+            const statusOut = await runGit(repo, ['status', '--porcelain=v1', '-z'])
+            const stagedNum = await runGit(repo, ['diff', '--cached', '--numstat', '-z'])
+            const unstagedNum = await runGit(repo, ['diff', '--numstat', '-z'])
             const stagedCounts = parseNumstatZ(stagedNum)
             const unstagedCounts = parseNumstatZ(unstagedNum)
             const staged = []

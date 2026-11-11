@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtempSync, writeFileSync, symlinkSync, mkdirSync, rmSync, realpathSync } from 'node:fs'
+import { mkdtempSync, readFileSync, writeFileSync, symlinkSync, mkdirSync, rmSync, realpathSync } from 'node:fs'
 import { join } from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { apply, API_PREFIX } from './index.js'
@@ -97,6 +97,20 @@ test('Git failures retain bounded English diagnostics', async () => {
   assert.match(result.detail, /pathspec|did not match/)
   assert.equal(result.detail.length <= 4000, true)
 })
+test('workstatus surfaces a failed Git index read instead of reporting a clean tree', async () => {
+  const index = join(repo, '.git', 'index'), original = readFileSync(index)
+  try {
+    writeFileSync(index, 'invalid-index')
+    const result = await request('workstatus')
+    assert.equal(result.ok, false)
+    assert.equal(result.error, 'git-failed')
+    assert.match(result.detail, /index|signature/i)
+    assert.ok(result.detail.length <= 4000)
+    assert.equal('counts' in result, false)
+  } finally { writeFileSync(index, original) }
+  assert.equal((await request('workstatus')).ok, true)
+})
+
 test('same-origin POST retains staging and addrepo features', async () => {
   assert.equal((await request('gitop', { action: 'stage', file: 'new.txt' }, 'POST')).ok, true)
   assert.equal((await request('workstatus')).staged.some((file) => file.path === 'new.txt'), true)
