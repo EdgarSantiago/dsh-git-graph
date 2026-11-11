@@ -1,0 +1,83 @@
+{
+  "name": "@edgarsantiago/dsh-git-graph",
+  "private": true,
+  "version": "0.14.5",
+  "description": "English-only, workspace-scoped Git graph, diffs and confirmed Git operations inside DeepSeek Harness.",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EdgarSantiago/dsh-git-graph.git"
+  },
+  "homepage": "https://github.com/EdgarSantiago/dsh-git-graph#readme",
+  "bugs": { "url": "https://github.com/EdgarSantiago/dsh-git-graph/issues" },
+  "contributors": [
+    { "name": "Original dsh-git-graph contributors", "url": "https://github.com/1841220388zzzcccxxx-star/dsh-git-graph" },
+    { "name": "EdgarSantiago", "url": "https://github.com/EdgarSantiago" }
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "git",
+    "graph",
+    "visualization",
+    "developer-tools"
+  ],
+  "files": [
+    "index.js",
+    "client.js",
+    "locale/*.json",
+    "icon.svg",
+    "README_PTBR.md",
+    "cordis.patch.yml",
+    "README.md",
+    "README_EN.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "engines": {
+    "node": ">=18",
+    "dsh": "0.2.2-rc.1"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": "0.2.2-rc.1"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "test": "node --test *.test.js",
+    "check": "node --check index.js && node --check client.js"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-api-workspace-controller"
+      ],
+      "platform": "web"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.1.0"
+  }
+}
