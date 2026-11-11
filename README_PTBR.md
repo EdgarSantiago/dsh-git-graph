@@ -1,55 +1,109 @@
-# Git graph
+# Git Graph para DeepSeek Harness
 
-Adaptação local do [dsh-git-graph](https://github.com/1841220388zzzcccxxx-star/dsh-git-graph), distribuída sob a licença MIT original.
+Histórico de commits, diferenças por arquivo e alterações locais dentro da conversa do Harness.
+
+**Harness:** `0.2.2-rc.1` · **Perfis:** Web / Desktop · **Interface:** inglês · **Licença:** [MIT](./LICENSE)
+
+[English](./README.md) · [Histórico de versões](./CHANGELOG.md) · [Reportar problema](https://github.com/EdgarSantiago/dsh-git-graph/issues)
+
+## Prévia
+
+![Git Graph com filtros de branches, painel compacto de alterações e histórico alinhado](./docs/images/git-graph-overview.png)
+
+*Interface real do plugin. Caminhos locais e nomes de autores foram ocultados para preservar a privacidade; o espaço vazio foi recortado.*
 
 ## Instalação pelo GitHub
 
+Requer **DeepSeek Harness `0.2.2-rc.1`**, **Node.js 18+** e **Git no PATH**. Outras versões do Harness não estão declaradas como compatíveis.
+
+**Perfil Web**
+
 ```sh
 dsh plugin --profile web add github:EdgarSantiago/dsh-git-graph
-# No aplicativo Desktop, use o perfil desktop:
+```
+
+**Perfil Desktop**
+
+```sh
 dsh plugin --profile desktop add github:EdgarSantiago/dsh-git-graph
 ```
 
-Pacote: `@edgarsantiago/dsh-git-graph`. Distribuição somente pelo GitHub nesta versão, sem publicação no npm. O tópico `dsh-plugin` permite descoberta pelo site; o Plugin Hub dentro do DSH exige também um pacote npm. A listagem depende da varredura/revisão do catálogo e não é imediata nem garantida. Veja as [regras oficiais do catálogo comunitário](https://dsh-plugin.org/submit).
+Abra uma conversa e selecione **Git graph**. Siga a orientação de recarga retornada pelo gerenciador de plugins, se houver.
 
-## Uso
+O pacote é `@edgarsantiago/dsh-git-graph`, distribuído somente pelo GitHub nesta versão, sem publicação no npm. A flag `private: true` impede publicação acidental no npm; ela não impede a instalação pelo GitHub.
 
-Abra a aba **Git graph** na conversa do Harness. Desde a versão **0.14.4**, a interface, as datas e os metadados do plugin ficam somente em inglês, independentemente do idioma do Harness. O seletor de idioma foi removido e escolhas antigas salvas no navegador são ignoradas. Mensagens de commits, nomes de branches e arquivos permanecem como estão no repositório. Os identificadores técnicos antigos são mantidos por compatibilidade, sem alterar repositórios lembrados por workspace.
+## Recursos
 
-- Histórico com linhas de ancestralidade, busca, paginação e filtro por branch local, remota ou tag.
-- Repositórios detectados automaticamente na raiz e em até dois níveis de subpastas do workspace da conversa, inclusive com o Agent inativo. O registro nativo de workspaces tem prioridade sobre a pasta antiga da sessão. **Open repository** usa o seletor nativo; **Find repositories** e **Refresh** refazem a descoberta.
-- Alterações separadas em preparados, não preparados e não rastreados; diferenças por arquivo, histórico do arquivo e seleção em lote.
-- Preparação, retirada da preparação, restauração, ignorar arquivos, commits, fetch, pull, push, branches e tags. Toda operação de escrita pede confirmação na interface.
-- Detalhes do commit e comparação: marque **Compare** em um commit e clique em outro.
-- Tema herdado do Harness, sem iframe e sem React duplicado.
+| Área | O que oferece |
+| --- | --- |
+| Histórico | Grafo, busca, filtro por branch local/remota ou tag e paginação |
+| Inspeção | Detalhes de commits, arquivos alterados, diffs, histórico de arquivo e comparação |
+| Alterações | Resumo compacto, grupos de preparados/não preparados/não rastreados e seleção em lote |
+| Operações | Stage, unstage, restore, ignore, commit, fetch, pull, push, branches e tags |
+| Workspace | Descoberta automática e seleção de repositório isoladas por workspace |
+| Interface | Aba nativa, tema do Harness, cabeçalhos alinhados, seleção visível e botões com ícones |
 
-## Segurança e limitações
+Não há iframe nem instalação separada do React. Os controles e as datas ficam em inglês; mensagens de commits, autores, branches e caminhos não são traduzidos.
 
-O servidor exige a autenticação do Harness. Operações de escrita exigem POST de mesma origem. Comandos usam argumentos fixos, caminhos literais e validações de repositório e symlinks.
+## Uso diário
 
-A ferramenta `git_graph_operation` oferece ao Agent o mesmo executor de operações, limitada ao repositório da pasta de trabalho atual; requer aprovação explícita a cada chamada.
+1. **Escolha o repositório.** As pastas Git do workspace aparecem automaticamente. Use **Find repositories** para refazer a busca ou **Open repository** para adicionar uma pasta explicitamente.
+2. **Explore o histórico.** Filtre por branch/tag, pesquise e clique em um commit para abrir seus detalhes.
+3. **Compare commits.** Selecione **Compare** nos detalhes de um commit e depois escolha outro.
+4. **Revise as alterações.** Expanda **Changes**, confira os diffs e selecione arquivos individualmente ou em lote.
+5. **Confirme as escritas.** Confira o repositório, a operação e os arquivos no diálogo antes de executar.
 
-As oito decorações animadas e a autoatualização do original não são incluídas. A autoatualização foi desativada para não substituir esta adaptação por arquivos do upstream. O filtro mostra uma branch por vez. Não há polling automático; use **Refresh** após alterações externas. O grafo exibe até oito trilhas visuais e carrega 200 commits por página.
+Use **Refresh** após alterações externas. Esse botão também atualiza a lista de repositórios.
 
-Mensagens de commit, nomes de arquivo, branches e saídas técnicas do Git permanecem no idioma original. Os controles do plugin ficam somente em inglês; não há seletor de idioma.
+### Estados dos botões
 
-## Isolamento por workspace (0.14.3)
+- **Stage all:** disponível com arquivos não preparados ou não rastreados.
+- **Unstage all:** disponível quando há arquivos preparados.
+- **Commit:** disponível com alterações locais. Prepare os arquivos antes ou marque **Stage all files before committing** no diálogo.
+- **Fetch / Pull / Push:** continuam disponíveis com a árvore limpa; não dependem de alterações locais.
 
-A lista e a seleção não são mais globais. Cada workspace tem sua própria memória de pastas abertas e repositório escolhido. O cache global antigo não é importado, pois misturava projetos diferentes.
+As ações ficam desabilitadas durante carregamento/operações. Em painéis estreitos, o seletor de branches preserva as ações disponíveis para a branch/tag escolhida.
 
-Um workspace com duas pastas, cada uma contendo `.git`, lista os dois repositórios automaticamente. A busca também encontra repositórios internos quando a própria raiz já tem Git; não para no primeiro resultado e não sobe para o Git de uma pasta ancestral fora do workspace. Limites: dois níveis, 300 diretórios e 20 resultados por varredura; pastas pesadas/ocultas e symlinks externos são ignorados. Arquivos `.git` de worktrees são aceitos.
+### Atalhos
 
-O workspace associado à sessão é consultado no registro nativo do Harness. Seu identificador, caminho canônico confirmado e sessão acompanham todas as leituras e operações. Trocar de workspace desmonta a visão anterior, cancela requisições e limpa grafo, arquivos, comparação e confirmações. Respostas atrasadas não podem preencher outro projeto; uma operação com contexto antigo é recusada antes de executar Git.
+| Atalho | Ação |
+| --- | --- |
+| `↑` / `↓` | Selecionar commit |
+| `Enter` | Abrir detalhes |
+| `Ctrl/⌘ + F` | Focar a busca |
+| `Escape` | Fechar detalhes ou a confirmação ativa |
 
-Uma pasta externa só entra na lista daquele workspace após **Open repository**, por escolha explícita. Não vira opção dos demais workspaces. A raiz consultada fica visível abaixo do seletor. Se o workspace não tiver Git, o painel permanece vazio em vez de escolher outro projeto como fallback.
+## Isolamento por workspace
 
-## Ciclo de vida e erros
+A busca verifica a raiz e até **dois níveis de subpastas**, incluindo repositórios irmãos, internos e worktrees. Cada varredura examina até **300 diretórios e 20 repositórios**, ignorando pastas pesadas/ocultas e symlinks externos.
 
-A rota e a ferramenta pertencem a efeitos descartáveis, com rollback em falhas de ativação. O endpoint `/git-graph-bilingual/api` é mantido por compatibilidade, não por suporte a múltiplos idiomas. Falhas ao ler o índice/status do Git retornam erro explícito, nunca um estado falso de árvore limpa.
+Pastas abertas manualmente e a seleção pertencem somente ao workspace atual. A troca cancela requisições antigas e limpa detalhes e confirmações. Um workspace sem Git permanece vazio: o plugin não escolhe outro projeto como fallback, não sobe para uma raiz Git externa e não inicializa repositórios automaticamente.
+
+## Permissões e segurança
+
+> **Restore/discard pode apagar alterações locais. Push publica commits.** Revise sempre a confirmação.
+
+- Lê histórico, refs, configuração, status e diffs solicitados. Operações confirmadas podem modificar arquivos, o índice e refs do Git.
+- Escritas pela UI exigem confirmação. A ferramenta `git_graph_operation` exige aprovação em cada chamada e fica limitada ao repositório atual do Agent; ambos usam o mesmo executor.
+- Exige autenticação do Harness, POST de mesma origem para escritas e autorização de workspace/repositório, com validação de caminhos e symlinks e diagnósticos limitados, com dados sensíveis ocultados.
+- Executa Git com `execFile` e argumentos separados, sem interpolação de shell. Falhas ao ler o índice/status retornam erro explícito em vez de um falso estado limpo.
+- Fetch, pull e push usam os remotes e as credenciais já configurados no Git. **Open remote commit** abre um link HTTPS no navegador.
+- O armazenamento do navegador guarda as escolhas por workspace. A UI e a sugestão heurística de mensagem não chamam IA; conversas normais do Agent mantêm seu consumo habitual.
+
+O plugin não adiciona endpoint de telemetria nem autoatualização.
+
+## Compatibilidade e limites
+
+- Desenvolvimento e registro ao vivo verificados no **macOS**; não há certificação visual das outras plataformas.
+- Histórico em páginas de **200 commits**, um filtro de branch por vez e até **oito trilhas visuais**.
+- Sem polling automático: use **Refresh** após alterações externas.
+- O endpoint `/git-graph-bilingual/api` e o ID do Slot são mantidos por compatibilidade, não por suporte a múltiplos idiomas.
+
+### Catálogo comunitário
+
+O repositório usa o tópico **`dsh-plugin`** e segue os [requisitos do catálogo](https://dsh-plugin.org/submit). O site pode indexar repositórios públicos após a varredura/revisão; o Plugin Hub dentro do DSH exige também um pacote npm. Não há afirmação de listagem ou verificação comunitária concluída.
 
 ## Desenvolvimento
-
-Compatibilidade declarada: DSH **0.2.2-rc.1**, versão disponível durante a implementação. Não há dependências em produção nem script de build. Os testes usam o SDK do Cordis como dependência de desenvolvimento.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
@@ -57,6 +111,12 @@ pnpm run check
 pnpm test
 ```
 
-A instalação é feita pelo gerenciador de plugins do Harness, apontando para este diretório. Alterações posteriores dos módulos Host/Client podem exigir reinstalação e reinício; não há promessa de atualização automática sem o watcher de desenvolvimento do Harness.
+Não há build nem dependências de produção. Os testes usam o runner nativo do Node, o SDK do Cordis e repositórios Git reais e isolados. Cobrem autenticação/origem, caminhos, isolamento, ciclo de vida, operações confirmadas, falhas no índice, estados de ações e interface em inglês. A validação automatizada não substitui a revisão visual no Harness.
 
-Validação automatizada cobre o backend com repositórios temporários isolados, autenticação/origem, traversal, symlinks, commits/diffs e a aprovação da ferramenta. A validação visual em navegador precisa ser realizada no Harness conectado.
+- [Host](./index.js): API Git e ferramenta com aprovação.
+- [Client](./client.js): visão nativa da conversa.
+- [Bundle](./cordis.patch.yml): registro do plugin.
+
+## Licença e créditos
+
+Mantido por [EdgarSantiago](https://github.com/EdgarSantiago). Adaptação independente, desenvolvida com auxílio de IA, baseada no [dsh-git-graph original](https://github.com/1841220388zzzcccxxx-star/dsh-git-graph), com o aviso de copyright preservado sob a [licença MIT](./LICENSE). Não é um produto oficial da DeepSeek.

@@ -30,6 +30,7 @@
     "client.js",
     "locale/*.json",
     "icon.svg",
+    "docs/images/*.png",
     "README_PTBR.md",
     "cordis.patch.yml",
     "README.md",
