@@ -2,7 +2,7 @@
 
 Commit history, file diffs and working-tree changes—inside your Harness conversation.
 
-**Harness:** `0.2.2-rc.1` / `0.2.2-rc.2` · **Profiles:** Web / Desktop · **UI:** English · **License:** [MIT](./LICENSE)
+**Harness:** `0.2.2-rc.1` / `0.2.2-rc.2` · **Profiles:** Web / Desktop · **UI:** Harness language · **License:** [MIT](./LICENSE)
 
 **Category:** Development & Operations
 
@@ -45,7 +45,7 @@ This is **GitHub-only distribution**, not an npm release. The package identifier
 | Workspace | Automatic repository discovery and remembered selection isolated per workspace |
 | Interface | Native Harness tab and theme, aligned headers, visible selections, icon-labeled actions |
 
-There is no iframe or separate React installation. Controls and dates stay in English; commit messages, authors, branches and file paths remain unchanged.
+There is no iframe or separate React installation. Controls, accessibility labels, confirmations, notices and dates follow **Settings → Language** reactively: English (`en`), Brazilian Portuguese (`pt`, alias `pt-BR`), Chinese (`zh`), Japanese (`ja`), Spanish (`es`), French (`fr`), German (`de`) and Russian (`ru`). There is no plugin language selector or saved override; changing the language preserves the open view and confirmation state. Commit messages, authors, branches, paths and raw Git output remain unchanged. Missing translations use the Harness locale service’s fallback chain (English, then the key).
 
 ## Everyday use
 
@@ -99,7 +99,7 @@ The plugin adds no telemetry endpoint or automatic self-update.
 - Live plugin registration and development were checked on **macOS**. Other operating systems' GUIs have not been certified.
 - History loads **200 commits per page**, with one branch filter at a time and up to **eight visual graph lanes**.
 - There is no automatic polling; use **Refresh** for external changes.
-- The historical `/git-graph-bilingual/api` endpoint and Slot ID remain stable for compatibility. They do not indicate a language selector or a translated UI.
+- The historical `/git-graph-bilingual/api` endpoint and Slot ID remain stable for compatibility, independently of locale support. No separate language selector is added.
 
 ### Community catalog
 
@@ -113,7 +113,7 @@ pnpm run check
 pnpm test
 ```
 
-No build step or production dependencies are required. Tests use Node's built-in runner, the Cordis SDK and isolated real Git repositories. Coverage includes auth/origin checks, path boundaries, workspace races, lifecycle disposal, confirmed operations, failed index reads, UI action states and the English-only contract. Automated checks do not replace visual review in Harness.
+No build step or production dependencies are required. The single ModuleLoader client embeds all dictionaries and uses the native Harness locale service (`ctx.locale`) with effect-owned registrations and a reactive snapshot subscription. Metadata in `locale/*.json` covers every language and the Portuguese alias. Tests use Node's built-in runner, the Cordis SDK and isolated real Git repositories kept inside this folder. Coverage includes auth/origin checks, path boundaries, workspace races, lifecycle disposal, confirmed operations, failed index reads, UI action states, dictionary key parity, aliases, date/fallback formatting, language-selection wiring and live notice/confirmation formatting. Automated checks do not replace visual review in Harness.
 
 - [Host entry](./index.js): Git API and approval-gated Agent tool.
 - [Client entry](./client.js): native conversation view.

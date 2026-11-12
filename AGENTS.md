@@ -16,7 +16,9 @@
 - Keep the stable `/git-graph-bilingual/api` prefix and `git-graph-bilingual` Slot ID unless an explicit migration is requested. They are identifiers, not language support.
 - Repository discovery and browser memory belong to a canonical workspace. Never fall back to globally remembered repositories or an enclosing unrelated Git root.
 - Own route/tool registrations through Cordis effects, with idempotent cleanup and activation rollback. An ordinary `dispose` event is not plugin lifecycle cleanup.
-- Keep the UI English-only; do not reintroduce a language selector or global Harness locale dependency.
+- Follow Harness Settings → Language through `ctx.locale` for all native languages: en, pt (pt-BR alias), zh, ja, es, fr, de and ru. This explicitly replaces the former English-only policy. Never add a plugin language selector or write the Harness locale preference.
+- Keep dictionaries inside the self-contained `client.js` ModuleLoader artifact (no external JS imports without a packaging/build change). Own namespace registrations through `ctx.effect`, subscribe reactively, and use a live Slot label. Keep notice keys rather than rendered translations so open panels/dialogs follow language changes without losing state.
+- Translate plugin controls, accessibility labels, confirmations and fallbacks; keep commits, authors, refs, paths and raw Git diagnostics literal. Format dates in the selected locale and maintain localized `locale/*.json` metadata, including the pt-BR alias.
 - Target exactly `0.2.2-rc.1 || 0.2.2-rc.2` consistently in `engines.dsh` and the optional DSH peer. Both were checked against their SDKs; do not broaden compatibility without new evidence.
 - Preserve the original MIT notice and upstream attribution. Do not commit credentials, machine-specific host paths, node_modules, archives or profile data.
 - Write JSON/YAML as UTF-8 without BOM.

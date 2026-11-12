@@ -4,6 +4,11 @@
 
 - Admit exactly DSH `0.2.2-rc.1 || 0.2.2-rc.2` in both engine and optional peer after inspecting rc.2 Host/Client contracts and running regressions against both Cordis SDKs. Preserve all existing Git, workspace, authentication and approval behavior; live GUI verification remains separate.
 
+- Replace the former English-only requirement with Harness Settings → Language integration for en, pt (pt-BR alias), zh, ja, es, fr, de and ru; no separate selector or preference write.
+- Embed complete dictionaries in the self-contained ModuleLoader client, register them through lifecycle-owned locale effects, and reactively translate the tab, controls, aria labels, confirmations and notices without resetting view state. Dates follow the selected language.
+- Localize display metadata for all languages; preserve commits, authors, refs, paths, raw Git diagnostics, stable API/Slot IDs and all workspace/auth/approval protections.
+- Replace English-only regressions with locale key/alias/date/fallback/selection and live-feedback contract checks. Keep lifecycle test fixtures within the plugin directory.
+
 - Compress a clean working tree into one Changes summary row, with collapsible file groups when changes exist.
 - Add subtle theme-based borders, clearer selected branches/commits and current-branch indicators.
 - Align commit, hash, author and date headers; use a compact graph gutter and a sticky table header.

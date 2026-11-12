@@ -21,7 +21,9 @@ test('source distribution includes every runtime resource and keeps the npm-publ
   assert.ok(manifest.files.includes(file),file)
   assert.ok(existsSync(new URL(file,import.meta.url)),file)
  }
- for(const file of ['package.json','cordis.patch.yml','locale/en.json','locale/pt.json','locale/pt-BR.json'])assert.ok(!read(file).startsWith('\ufeff'),file)
+ for(const file of ['package.json','cordis.patch.yml',...['en','pt','pt-BR','zh','ja','es','fr','de','ru'].map(tag=>'locale/'+tag+'.json')])assert.ok(!read(file).startsWith('\ufeff'),file)
+  assert.ok(manifest.files.includes('locale/*.json'))
+  assert.equal(manifest.exports['./locale/*.json'],'./locale/*.json')
  assert.ok(!manifest.scripts.prepare&&!manifest.scripts.prepack&&!manifest.scripts.install)
  assert.ok(read('LICENSE').includes('Copyright (c) 2026 dsh-git-graph contributors'))
 })

@@ -2,7 +2,7 @@
   "name": "@edgarsantiago/dsh-git-graph",
   "private": true,
   "version": "0.14.6",
-  "description": "English-only, workspace-scoped Git graph, diffs and confirmed Git operations inside DeepSeek Harness.",
+  "description": "Localized, workspace-scoped Git graph, diffs and confirmed Git operations inside DeepSeek Harness.",
   "license": "MIT",
   "type": "module",
   "main": "index.js",
@@ -65,7 +65,8 @@
     "client": {
       "inject": [
         "@deepseek-ai/dsh-client-ui-conversation",
-        "@deepseek-ai/dsh-api-workspace-controller"
+        "@deepseek-ai/dsh-api-workspace-controller",
+        "@deepseek-ai/dsh-client-locale"
       ],
       "platform": "web"
     },
