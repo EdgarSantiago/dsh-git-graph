@@ -2,7 +2,7 @@
 
 Commit history, file diffs and working-tree changes—inside your Harness conversation.
 
-**Harness:** `0.2.2-rc.1` · **Profiles:** Web / Desktop · **UI:** English · **License:** [MIT](./LICENSE)
+**Harness:** `0.2.2-rc.1` / `0.2.2-rc.2` · **Profiles:** Web / Desktop · **UI:** English · **License:** [MIT](./LICENSE)
 
 **Category:** Development & Operations
 
@@ -16,7 +16,7 @@ Commit history, file diffs and working-tree changes—inside your Harness conver
 
 ## Install from GitHub
 
-Requires **DeepSeek Harness `0.2.2-rc.1`**, **Node.js 18+**, and **Git on PATH**. Other Harness versions are not declared compatible.
+Requires **DeepSeek Harness `0.2.2-rc.1` or `0.2.2-rc.2`**, **Node.js 18+**, and **Git on PATH**. Other Harness versions are not declared compatible.
 
 **Web profile**
 

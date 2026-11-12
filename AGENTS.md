@@ -17,7 +17,7 @@
 - Repository discovery and browser memory belong to a canonical workspace. Never fall back to globally remembered repositories or an enclosing unrelated Git root.
 - Own route/tool registrations through Cordis effects, with idempotent cleanup and activation rollback. An ordinary `dispose` event is not plugin lifecycle cleanup.
 - Keep the UI English-only; do not reintroduce a language selector or global Harness locale dependency.
-- Target `0.2.2-rc.1` consistently in `engines.dsh` and the optional DSH peer. Do not broaden compatibility without new evidence.
+- Target exactly `0.2.2-rc.1 || 0.2.2-rc.2` consistently in `engines.dsh` and the optional DSH peer. Both were checked against their SDKs; do not broaden compatibility without new evidence.
 - Preserve the original MIT notice and upstream attribution. Do not commit credentials, machine-specific host paths, node_modules, archives or profile data.
 - Write JSON/YAML as UTF-8 without BOM.
 

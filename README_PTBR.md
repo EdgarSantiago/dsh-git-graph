@@ -2,7 +2,7 @@
 
 Histórico de commits, diferenças por arquivo e alterações locais dentro da conversa do Harness.
 
-**Harness:** `0.2.2-rc.1` · **Perfis:** Web / Desktop · **Interface:** inglês · **Licença:** [MIT](./LICENSE)
+**Harness:** `0.2.2-rc.1` / `0.2.2-rc.2` · **Perfis:** Web / Desktop · **Interface:** inglês · **Licença:** [MIT](./LICENSE)
 
 [English](./README.md) · [Histórico de versões](./CHANGELOG.md) · [Reportar problema](https://github.com/EdgarSantiago/dsh-git-graph/issues)
 
@@ -14,7 +14,7 @@ Histórico de commits, diferenças por arquivo e alterações locais dentro da c
 
 ## Instalação pelo GitHub
 
-Requer **DeepSeek Harness `0.2.2-rc.1`**, **Node.js 18+** e **Git no PATH**. Outras versões do Harness não estão declaradas como compatíveis.
+Requer **DeepSeek Harness `0.2.2-rc.1` ou `0.2.2-rc.2`**, **Node.js 18+** e **Git no PATH**. Outras versões do Harness não estão declaradas como compatíveis.
 
 **Perfil Web**
 

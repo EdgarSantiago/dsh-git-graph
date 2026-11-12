@@ -11,6 +11,7 @@ test('public package identity matches Client module, bundle and GitHub source',(
  assert.ok(read('cordis.patch.yml').includes("name: '"+manifest.name+"'"))
  assert.equal(manifest.repository.url,'https://github.com/EdgarSantiago/dsh-git-graph.git')
  assert.equal(manifest.license,'MIT')
+ assert.equal(manifest.engines.dsh,'0.2.2-rc.1 || 0.2.2-rc.2')
  assert.equal(manifest.engines.dsh,manifest.peerDependencies['@deepseek-ai/dsh'])
  assert.equal(manifest.peerDependenciesMeta['@deepseek-ai/dsh'].optional,true)
 })

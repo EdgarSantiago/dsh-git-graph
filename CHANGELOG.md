@@ -2,6 +2,8 @@
 
 ## 0.14.6 (local, unreleased)
 
+- Admit exactly DSH `0.2.2-rc.1 || 0.2.2-rc.2` in both engine and optional peer after inspecting rc.2 Host/Client contracts and running regressions against both Cordis SDKs. Preserve all existing Git, workspace, authentication and approval behavior; live GUI verification remains separate.
+
 - Compress a clean working tree into one Changes summary row, with collapsible file groups when changes exist.
 - Add subtle theme-based borders, clearer selected branches/commits and current-branch indicators.
 - Align commit, hash, author and date headers; use a compact graph gutter and a sticky table header.
