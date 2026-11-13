@@ -2,7 +2,7 @@
 
 ## 0.14.6 (local, unreleased)
 
-- Admit exactly DSH `0.2.2-rc.1 || 0.2.2-rc.2` in both engine and optional peer after inspecting rc.2 Host/Client contracts and running regressions against both Cordis SDKs. Preserve all existing Git, workspace, authentication and approval behavior; live GUI verification remains separate.
+- Use the user-authorized DSH 0.2.2-line range `>=0.2.2-rc.1 <0.2.3-0` consistently in engine and optional peer. Retain rc.1/rc.2 regression evidence and inspect relevant installed rc.3 Host/Client contracts; later 0.2.2 candidates are allowed by policy, not individually certified. Block 0.2.3 prereleases and later releases. Preserve all existing Git, workspace, authentication and approval behavior; live GUI verification remains separate.
 
 - Replace the former English-only requirement with Harness Settings → Language integration for en, pt (pt-BR alias), zh, ja, es, fr, de and ru; no separate selector or preference write.
 - Embed complete dictionaries in the self-contained ModuleLoader client, register them through lifecycle-owned locale effects, and reactively translate the tab, controls, aria labels, confirmations and notices without resetting view state. Dates follow the selected language.

@@ -11,7 +11,7 @@ test('public package identity matches Client module, bundle and GitHub source',(
  assert.ok(read('cordis.patch.yml').includes("name: '"+manifest.name+"'"))
  assert.equal(manifest.repository.url,'https://github.com/EdgarSantiago/dsh-git-graph.git')
  assert.equal(manifest.license,'MIT')
- assert.equal(manifest.engines.dsh,'0.2.2-rc.1 || 0.2.2-rc.2')
+ assert.equal(manifest.engines.dsh,'>=0.2.2-rc.1 <0.2.3-0')
  assert.equal(manifest.engines.dsh,manifest.peerDependencies['@deepseek-ai/dsh'])
  assert.equal(manifest.peerDependenciesMeta['@deepseek-ai/dsh'].optional,true)
 })
@@ -33,6 +33,7 @@ test('pnpm frozen installation uses the same peer setting as the committed lockf
 })
 test('catalog README documents source install, category, permissions and original attribution',()=>{
  const text=read('README.md')
+ for(const file of ['README.md','README_PTBR.md','AGENTS.md'])assert.ok(read(file).includes(manifest.engines.dsh),file)
  assert.ok(text.includes('dsh plugin --profile web add github:EdgarSantiago/dsh-git-graph'))
  for(const required of ['dsh-plugin','Development & Operations','0.2.2-rc.1','Permissions','GitHub-only','not an npm release','1841220388zzzcccxxx-star/dsh-git-graph'])assert.ok(text.includes(required),required)
 })

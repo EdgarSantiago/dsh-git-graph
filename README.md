@@ -2,7 +2,7 @@
 
 Commit history, file diffs and working-tree changes—inside your Harness conversation.
 
-**Harness:** `0.2.2-rc.1` / `0.2.2-rc.2` · **Profiles:** Web / Desktop · **UI:** Harness language · **License:** [MIT](./LICENSE)
+**Harness:** `>=0.2.2-rc.1 <0.2.3-0` · **Profiles:** Web / Desktop · **UI:** Harness language · **License:** [MIT](./LICENSE)
 
 **Category:** Development & Operations
 
@@ -16,7 +16,7 @@ Commit history, file diffs and working-tree changes—inside your Harness conver
 
 ## Install from GitHub
 
-Requires **DeepSeek Harness `0.2.2-rc.1` or `0.2.2-rc.2`**, **Node.js 18+**, and **Git on PATH**. Other Harness versions are not declared compatible.
+Requires **DeepSeek Harness `>=0.2.2-rc.1 <0.2.3-0`**, **Node.js 18+**, and **Git on PATH**. This user-authorized 0.2.2-line policy admits rc.1 onward and stable 0.2.2; even 0.2.3 prereleases remain blocked. rc.1/rc.2 regression evidence is retained, and relevant installed rc.3 Host/Client contracts were inspected. Future 0.2.2 candidates are allowed by policy, not individually certified; live GUI verification remains separate.
 
 **Web profile**
 

@@ -19,7 +19,7 @@
 - Follow Harness Settings → Language through `ctx.locale` for all native languages: en, pt (pt-BR alias), zh, ja, es, fr, de and ru. This explicitly replaces the former English-only policy. Never add a plugin language selector or write the Harness locale preference.
 - Keep dictionaries inside the self-contained `client.js` ModuleLoader artifact (no external JS imports without a packaging/build change). Own namespace registrations through `ctx.effect`, subscribe reactively, and use a live Slot label. Keep notice keys rather than rendered translations so open panels/dialogs follow language changes without losing state.
 - Translate plugin controls, accessibility labels, confirmations and fallbacks; keep commits, authors, refs, paths and raw Git diagnostics literal. Format dates in the selected locale and maintain localized `locale/*.json` metadata, including the pt-BR alias.
-- Target exactly `0.2.2-rc.1 || 0.2.2-rc.2` consistently in `engines.dsh` and the optional DSH peer. Both were checked against their SDKs; do not broaden compatibility without new evidence.
+- Keep `>=0.2.2-rc.1 <0.2.3-0` consistently in `engines.dsh` and the optional DSH peer. This user-authorized 0.2.2-line policy follows rc.1/rc.2 regression coverage and rc.3 installed API inspection; it admits later 0.2.2 candidates and stable 0.2.2, not 0.2.3 prereleases or later releases. Future candidates are allowed by policy, not individually certified. Do not broaden beyond this line without explicit approval and new compatibility evidence.
 - Preserve the original MIT notice and upstream attribution. Do not commit credentials, machine-specific host paths, node_modules, archives or profile data.
 - Write JSON/YAML as UTF-8 without BOM.
 

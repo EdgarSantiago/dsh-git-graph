@@ -2,7 +2,7 @@
 
 Histórico de commits, diferenças por arquivo e alterações locais dentro da conversa do Harness.
 
-**Harness:** `0.2.2-rc.1` / `0.2.2-rc.2` · **Perfis:** Web / Desktop · **Interface:** idioma do Harness · **Licença:** [MIT](./LICENSE)
+**Harness:** `>=0.2.2-rc.1 <0.2.3-0` · **Perfis:** Web / Desktop · **Interface:** idioma do Harness · **Licença:** [MIT](./LICENSE)
 
 [English](./README.md) · [Histórico de versões](./CHANGELOG.md) · [Reportar problema](https://github.com/EdgarSantiago/dsh-git-graph/issues)
 
@@ -14,7 +14,7 @@ Histórico de commits, diferenças por arquivo e alterações locais dentro da c
 
 ## Instalação pelo GitHub
 
-Requer **DeepSeek Harness `0.2.2-rc.1` ou `0.2.2-rc.2`**, **Node.js 18+** e **Git no PATH**. Outras versões do Harness não estão declaradas como compatíveis.
+Requer **DeepSeek Harness `>=0.2.2-rc.1 <0.2.3-0`**, **Node.js 18+** e **Git no PATH**. Esta política autorizada pelo usuário admite a linha 0.2.2 desde rc.1, inclusive a versão estável, mas bloqueia até os pré-lançamentos de 0.2.3. Mantém as evidências de regressão de rc.1/rc.2 e inclui inspeção dos contratos Host/Client relevantes da rc.3 instalada. Futuras candidatas de 0.2.2 são admitidas pela política, não certificadas individualmente; a verificação visual continua separada.
 
 **Perfil Web**
 
